@@ -13,6 +13,8 @@
 		A15D1C6623650024002DD4B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A15D1C6523650024002DD4B5 /* Preview Assets.xcassets */; };
 		A15D1C6923650024002DD4B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A15D1C6723650024002DD4B5 /* Main.storyboard */; };
 		A15D1CC42365234A002DD4B5 /* ChapterOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CC32365234A002DD4B5 /* ChapterOne.swift */; };
+		A15D1CC6236635AC002DD4B5 /* ChapterTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CC5236635AC002DD4B5 /* ChapterTwo.swift */; };
+		A15D1CCC23663DB1002DD4B5 /* ChapterTwoShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CCB23663DB1002DD4B5 /* ChapterTwoShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,10 @@
 		A15D1C6A23650024002DD4B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A15D1C6B23650024002DD4B5 /* MetalByExampleExamples.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalByExampleExamples.entitlements; sourceTree = "<group>"; };
 		A15D1CC32365234A002DD4B5 /* ChapterOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterOne.swift; sourceTree = "<group>"; };
+		A15D1CC5236635AC002DD4B5 /* ChapterTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTwo.swift; sourceTree = "<group>"; };
+		A15D1CC92366382D002DD4B5 /* ChapterTwoShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChapterTwoShaderTypes.h; sourceTree = "<group>"; };
+		A15D1CCA23663A38002DD4B5 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		A15D1CCB23663DB1002DD4B5 /* ChapterTwoShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ChapterTwoShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,8 @@
 		A15D1C5D23650021002DD4B5 /* MetalByExampleExamples */ = {
 			isa = PBXGroup;
 			children = (
+				A15D1CC823663819002DD4B5 /* ChapterTwo */,
+				A15D1CC723663810002DD4B5 /* ChapterOne */,
 				A15D1C5E23650021002DD4B5 /* AppDelegate.swift */,
 				A15D1C6023650021002DD4B5 /* ContentView.swift */,
 				A15D1C6223650024002DD4B5 /* Assets.xcassets */,
@@ -64,7 +72,7 @@
 				A15D1C6A23650024002DD4B5 /* Info.plist */,
 				A15D1C6B23650024002DD4B5 /* MetalByExampleExamples.entitlements */,
 				A15D1C6423650024002DD4B5 /* Preview Content */,
-				A15D1CC32365234A002DD4B5 /* ChapterOne.swift */,
+				A15D1CCA23663A38002DD4B5 /* BridgingHeader.h */,
 			);
 			path = MetalByExampleExamples;
 			sourceTree = "<group>";
@@ -75,6 +83,24 @@
 				A15D1C6523650024002DD4B5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A15D1CC723663810002DD4B5 /* ChapterOne */ = {
+			isa = PBXGroup;
+			children = (
+				A15D1CC32365234A002DD4B5 /* ChapterOne.swift */,
+			);
+			path = ChapterOne;
+			sourceTree = "<group>";
+		};
+		A15D1CC823663819002DD4B5 /* ChapterTwo */ = {
+			isa = PBXGroup;
+			children = (
+				A15D1CC5236635AC002DD4B5 /* ChapterTwo.swift */,
+				A15D1CC92366382D002DD4B5 /* ChapterTwoShaderTypes.h */,
+				A15D1CCB23663DB1002DD4B5 /* ChapterTwoShaders.metal */,
+			);
+			path = ChapterTwo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,7 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15D1CC6236635AC002DD4B5 /* ChapterTwo.swift in Sources */,
 				A15D1C6123650021002DD4B5 /* ContentView.swift in Sources */,
+				A15D1CCC23663DB1002DD4B5 /* ChapterTwoShaders.metal in Sources */,
 				A15D1C5F23650021002DD4B5 /* AppDelegate.swift in Sources */,
 				A15D1CC42365234A002DD4B5 /* ChapterOne.swift in Sources */,
 			);
@@ -300,6 +328,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noahgilmore.MetalByExampleExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MetalByExampleExamples/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -323,6 +352,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noahgilmore.MetalByExampleExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MetalByExampleExamples/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

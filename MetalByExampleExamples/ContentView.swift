@@ -14,6 +14,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 NavigationLink(destination: ChapterOne()) { Text("Chapter One") }
+                NavigationLink(destination: ChapterTwo()) { Text("Chapter Two") }
             }.listStyle(SidebarListStyle())
         }.frame(minWidth: 1000, minHeight: 700)
     }
