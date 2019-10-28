@@ -9,7 +9,7 @@
 import MetalKit
 import SwiftUI
 
-final class ChapterOneView: NSView {
+final class ChapterTwoView: NSView {
     let mtkView = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
 
     init() {
@@ -36,7 +36,7 @@ final class ChapterOneView: NSView {
     }
 }
 
-extension ChapterOneView: MTKViewDelegate {
+extension ChapterTwoView: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         print("Drawable size changed to: \(size)")
     }
@@ -77,24 +77,24 @@ extension ChapterOneView: MTKViewDelegate {
     }
 }
 
-struct ChapterOneRepresentable: NSViewRepresentable {
+struct ChapterTwoRepresentable: NSViewRepresentable {
     let color: NSColor
 
-    func makeNSView(context: NSViewRepresentableContext<ChapterOneRepresentable>) -> ChapterOneView {
-        return ChapterOneView()
+    func makeNSView(context: NSViewRepresentableContext<ChapterTwoRepresentable>) -> ChapterTwoView {
+        return ChapterTwoView()
     }
 
-    func updateNSView(_ nsView: ChapterOneView, context: NSViewRepresentableContext<ChapterOneRepresentable>) {
+    func updateNSView(_ nsView: ChapterTwoView, context: NSViewRepresentableContext<ChapterTwoRepresentable>) {
         nsView.setClearColor(color)
     }
 }
 
-struct ChapterOne: View {
+struct ChapterTwo: View {
     @State var color: NSColor = .red
 
     var body: some View {
         VStack(spacing: 0) {
-            ChapterOneRepresentable(color: color)
+            ChapterTwoRepresentable(color: color)
             HStack(spacing: 10) {
                 ForEach(Array([
                     NSColor.red,
