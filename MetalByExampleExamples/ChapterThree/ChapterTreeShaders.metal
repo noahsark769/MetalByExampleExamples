@@ -9,7 +9,7 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct ChapterTwoVertexInOut {
+struct ChapterThreeVertexInOut {
     /// Position of the vertex
     float4 position [[position]];
 
@@ -17,12 +17,12 @@ struct ChapterTwoVertexInOut {
     float4 color;
 };
 
-vertex ChapterTwoVertexInOut chapter_two_vertex_shader(device ChapterTwoVertexInOut *vertices [[buffer(0)]],
+vertex ChapterThreeVertexInOut chapter_three_vertex_shader(device ChapterThreeVertexInOut *vertices [[buffer(0)]],
                                                        uint vertexId [[vertex_id]])
 {
     return vertices[vertexId];
 }
 
-fragment float4 chapter_two_fragment_shader(ChapterTwoVertexInOut inVertex [[stage_in]]) {
+fragment float4 chapter_three_fragment_shader(ChapterThreeVertexInOut inVertex [[stage_in]]) {
     return inVertex.color;
 }

@@ -6,8 +6,8 @@
 //  Copyright © 2019 Noah Gilmore. All rights reserved.
 //
 
-#ifndef ChapterTwoShaderTypes_h
-#define ChapterTwoShaderTypes_h
+#ifndef ChapterThreeShaderTypes_h
+#define ChapterThreeShaderTypes_h
 
 #ifdef __METAL_VERSION__
 #define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
@@ -24,6 +24,6 @@ typedef struct {
 
     /// Color of the vertex
     vector_float4 color;
-} ChapterTwoVertexInOut;
+} ChapterThreeVertexInOut;
 
 #endif /* ChapterTwoShaderTypes_h */

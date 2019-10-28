@@ -10,12 +10,12 @@ import Foundation
 import MetalKit
 import SwiftUI
 
-/// Goal of Chapter Two is to create a triangle on screen whose pixels are interpolated between red/blue/green based on their distance
+/// Goal of Chapter Three is to create a triangle on screen whose pixels are interpolated between red/blue/green based on their distance
 /// from the points of the triangle.
 
-final class ChapterTwoView: NSView {
+final class ChapterThreeView: NSView {
     private let mtkView: MTKView
-    private let vertices: [ChapterTwoVertexInOut]
+    private let vertices: [ChapterThreeVertexInOut]
     private let vertexBuffer: MTLBuffer
     private let pipelineState: MTLRenderPipelineState
 
@@ -26,11 +26,11 @@ final class ChapterTwoView: NSView {
         self.mtkView = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
 
         let vertices = [
-            ChapterTwoVertexInOut(position: SIMD4<Float>(0, 0.5, 0, 1), color: SIMD4<Float>(1, 0, 0, 1)),
-            ChapterTwoVertexInOut(position: SIMD4<Float>(-0.5, -0.5, 0, 1), color: SIMD4<Float>(0, 1, 0, 1)),
-            ChapterTwoVertexInOut(position: SIMD4<Float>(0.5, -0.5, 0, 1), color: SIMD4<Float>(0, 0, 1, 1)),
+            ChapterThreeVertexInOut(position: SIMD4<Float>(0, 0.5, 0, 1), color: SIMD4<Float>(1, 0, 0, 1)),
+            ChapterThreeVertexInOut(position: SIMD4<Float>(-0.5, -0.5, 0, 1), color: SIMD4<Float>(0, 1, 0, 1)),
+            ChapterThreeVertexInOut(position: SIMD4<Float>(0.5, -0.5, 0, 1), color: SIMD4<Float>(0, 0, 1, 1)),
         ]
-        guard let vertexBuffer = device.makeBuffer(bytes: UnsafeMutablePointer(mutating: vertices), length: MemoryLayout<ChapterTwoVertexInOut>.size * vertices.count, options: [.cpuCacheModeWriteCombined]) else {
+        guard let vertexBuffer = device.makeBuffer(bytes: UnsafeMutablePointer(mutating: vertices), length: MemoryLayout<ChapterThreeVertexInOut>.size * vertices.count, options: [.cpuCacheModeWriteCombined]) else {
             fatalError("Unable to allocate vertex buffer")
         }
         self.vertexBuffer = vertexBuffer
@@ -39,10 +39,10 @@ final class ChapterTwoView: NSView {
         guard let shaderLibrary = device.makeDefaultLibrary() else {
             fatalError("Unable to find device library. Maybe bundle issue?")
         }
-        guard let vertexFunction = shaderLibrary.makeFunction(name: "chapter_two_vertex_shader") else {
+        guard let vertexFunction = shaderLibrary.makeFunction(name: "chapter_three_vertex_shader") else {
             fatalError("Unable to find vertex function. Are you sure you defined it and spelled the name right?")
         }
-        guard let fragmentFunction = shaderLibrary.makeFunction(name: "chapter_two_fragment_shader") else {
+        guard let fragmentFunction = shaderLibrary.makeFunction(name: "chapter_three_fragment_shader") else {
             fatalError("Unable to find fragment function. Are you sure you defined it and spelled the name right?")
         }
 
@@ -77,7 +77,7 @@ final class ChapterTwoView: NSView {
     }
 }
 
-extension ChapterTwoView: MTKViewDelegate {
+extension ChapterThreeView: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         print("Drawable size changed to: \(size)")
     }
@@ -123,21 +123,21 @@ extension ChapterTwoView: MTKViewDelegate {
     }
 }
 
-struct ChapterTwoRepresentable: NSViewRepresentable {
-    func makeNSView(context: NSViewRepresentableContext<ChapterTwoRepresentable>) -> ChapterTwoView {
-        return ChapterTwoView()
+struct ChapterThreeRepresentable: NSViewRepresentable {
+    func makeNSView(context: NSViewRepresentableContext<ChapterThreeRepresentable>) -> ChapterThreeView {
+        return ChapterThreeView()
     }
 
-    func updateNSView(_ nsView: ChapterTwoView, context: NSViewRepresentableContext<ChapterTwoRepresentable>) {
+    func updateNSView(_ nsView: ChapterThreeView, context: NSViewRepresentableContext<ChapterThreeRepresentable>) {
         // nothing
         print("Update for some reason")
     }
 }
 
-struct ChapterTwo: View {
+struct ChapterThree: View {
     var body: some View {
         VStack(spacing: 0) {
-            ChapterTwoRepresentable()
+            ChapterThreeRepresentable()
         }
     }
 }
