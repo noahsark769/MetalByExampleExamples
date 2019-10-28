@@ -10,5 +10,6 @@
 #define BridgingHeader_h
 
 #import "ChapterThreeShaderTypes.h"
+#import "ChapterFourShaderTypes.h"
 
 #endif /* BridgingHeader_h */

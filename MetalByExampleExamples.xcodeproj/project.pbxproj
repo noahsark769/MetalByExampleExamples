@@ -15,6 +15,8 @@
 		A15D1CC42365234A002DD4B5 /* ChapterTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CC32365234A002DD4B5 /* ChapterTwo.swift */; };
 		A15D1CC6236635AC002DD4B5 /* ChapterThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CC5236635AC002DD4B5 /* ChapterThree.swift */; };
 		A15D1CCC23663DB1002DD4B5 /* ChapterTreeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A15D1CCB23663DB1002DD4B5 /* ChapterTreeShaders.metal */; };
+		A15D1D0823667D48002DD4B5 /* ChapterFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D1D0723667D48002DD4B5 /* ChapterFour.swift */; };
+		A15D1D0B23667FEC002DD4B5 /* ChapterFourShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A15D1D0A23667FEC002DD4B5 /* ChapterFourShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		A15D1CC92366382D002DD4B5 /* ChapterThreeShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChapterThreeShaderTypes.h; sourceTree = "<group>"; };
 		A15D1CCA23663A38002DD4B5 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		A15D1CCB23663DB1002DD4B5 /* ChapterTreeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ChapterTreeShaders.metal; sourceTree = "<group>"; };
+		A15D1D0723667D48002DD4B5 /* ChapterFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterFour.swift; sourceTree = "<group>"; };
+		A15D1D0923667EA7002DD4B5 /* ChapterFourShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChapterFourShaderTypes.h; sourceTree = "<group>"; };
+		A15D1D0A23667FEC002DD4B5 /* ChapterFourShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ChapterFourShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +68,7 @@
 		A15D1C5D23650021002DD4B5 /* MetalByExampleExamples */ = {
 			isa = PBXGroup;
 			children = (
+				A15D1D0623667D2E002DD4B5 /* ChapterFour */,
 				A15D1CC823663819002DD4B5 /* ChapterThree */,
 				A15D1CC723663810002DD4B5 /* ChapterTwo */,
 				A15D1C5E23650021002DD4B5 /* AppDelegate.swift */,
@@ -101,6 +107,16 @@
 				A15D1CCB23663DB1002DD4B5 /* ChapterTreeShaders.metal */,
 			);
 			path = ChapterThree;
+			sourceTree = "<group>";
+		};
+		A15D1D0623667D2E002DD4B5 /* ChapterFour */ = {
+			isa = PBXGroup;
+			children = (
+				A15D1D0723667D48002DD4B5 /* ChapterFour.swift */,
+				A15D1D0923667EA7002DD4B5 /* ChapterFourShaderTypes.h */,
+				A15D1D0A23667FEC002DD4B5 /* ChapterFourShaders.metal */,
+			);
+			path = ChapterFour;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +193,8 @@
 				A15D1CC6236635AC002DD4B5 /* ChapterThree.swift in Sources */,
 				A15D1C6123650021002DD4B5 /* ContentView.swift in Sources */,
 				A15D1CCC23663DB1002DD4B5 /* ChapterTreeShaders.metal in Sources */,
+				A15D1D0823667D48002DD4B5 /* ChapterFour.swift in Sources */,
+				A15D1D0B23667FEC002DD4B5 /* ChapterFourShaders.metal in Sources */,
 				A15D1C5F23650021002DD4B5 /* AppDelegate.swift in Sources */,
 				A15D1CC42365234A002DD4B5 /* ChapterTwo.swift in Sources */,
 			);
