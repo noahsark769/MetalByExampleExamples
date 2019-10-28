@@ -35,8 +35,9 @@ final class ChapterFourView: NSView {
         mtkView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         mtkView.delegate = self.renderer
 
-        mtkView.clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 1)
-        mtkView.enableSetNeedsDisplay = false
+//        mtkView.presentsWithTransaction = true
+        mtkView.clearColor = MTLClearColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+//        mtkView.enableSetNeedsDisplay = true
         mtkView.isPaused = false
     }
 
@@ -53,6 +54,12 @@ final class ChapterFourRenderer: NSObject {
     private let uniformsBuffer: MTLBuffer
     private let pipelineState: MTLRenderPipelineState
     private let depthState: MTLDepthStencilState
+    private var worldToView: matrix_float4x4
+    var offsetInViewCoordinates: CGPoint = .zero {
+        didSet {
+            
+        }
+    }
 
     init(device: MTLDevice, mtkView: MTKView) {
         let vertices = [
@@ -119,20 +126,23 @@ final class ChapterFourRenderer: NSObject {
         }
         self.pipelineState = pipelineState
 
-        super.init()
         let size = mtkView.drawableSize
         let aspect = Float(size.width) / Float(size.height)
+        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspect, nearZ: 1, farZ: 100)
+
+        super.init()
+        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspect, nearZ: 1, farZ: 100)
         self.updateUniformsForView(aspectRatio: aspect)
     }
 
     func updateUniformsForView(aspectRatio: Float) {
 //        let identity = matrix_float4x4(diagonal: SIMD4<Float>(1, 1, 1, 1))
         let modelToWorld =
-//            matrix4x4_rotation(radians: radians_from_degrees(30), axis: SIMD3<Float>(1, 0, 0))
-//            * matrix4x4_rotation(radians: radians_from_degrees(30), axis: SIMD3<Float>(0, 1, 0))
-            matrix4x4_translation(0, 0, -5)
-        let worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspectRatio, nearZ: 1, farZ: 100)
-        let uniforms = [ChapterFourUniforms(modelViewProjection: worldToView * modelToWorld)]
+            matrix4x4_translation(0, 0, -5) *
+            matrix4x4_rotation(radians: radians_from_degrees(45), axis: SIMD3<Float>(1, 0, 0)) *
+            matrix4x4_rotation(radians: radians_from_degrees(45), axis: SIMD3<Float>(0, 1, 0))
+        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspectRatio, nearZ: 1, farZ: 100)
+        let uniforms = [ChapterFourUniforms(modelViewProjection: self.worldToView * modelToWorld)]
         memcpy(self.uniformsBuffer.contents(), UnsafeRawPointer(uniforms), MemoryLayout<ChapterFourUniforms>.size)
     }
 }
@@ -143,6 +153,7 @@ extension ChapterFourRenderer: MTKViewDelegate {
 
         let aspect = Float(size.width) / Float(size.height)
         self.updateUniformsForView(aspectRatio: aspect)
+        view.setNeedsDisplay(view.bounds)
     }
 
     func draw(in view: MTKView) {
@@ -201,8 +212,12 @@ struct ChapterFourRepresentable: NSViewRepresentable {
 
 struct ChapterFour: View {
     var body: some View {
-        VStack(spacing: 0) {
-            ChapterFourRepresentable()
+        let gesture = DragGesture()
+            .onChanged { value in
+                print("Drag: x: \(value.location.x - value.startLocation.x), y: \(value.location.y - value.startLocation.y)")
+            }
+        return VStack(spacing: 0) {
+            ChapterFourRepresentable().gesture(gesture)
         }
     }
 }

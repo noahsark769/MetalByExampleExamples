@@ -18,12 +18,18 @@ final class ChapterThreeView: NSView {
     private let vertices: [ChapterThreeVertexInOut]
     private let vertexBuffer: MTLBuffer
     private let pipelineState: MTLRenderPipelineState
+    private let commandQueue: MTLCommandQueue
 
     init() {
         guard let device = MTLCreateSystemDefaultDevice() else {
             fatalError("This doesn't have a suitable GPU!")
         }
         self.mtkView = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
+
+        guard let commandQueue = device.makeCommandQueue() else {
+            fatalError("Error: unable to make command queue")
+        }
+        self.commandQueue = commandQueue
 
         let vertices = [
             ChapterThreeVertexInOut(position: SIMD4<Float>(0, 0.5, 0, 1), color: SIMD4<Float>(1, 0, 0, 1)),
@@ -88,12 +94,7 @@ extension ChapterThreeView: MTKViewDelegate {
             return
         }
 
-        guard let commandQueue = device.makeCommandQueue() else {
-            print("Error: unable to make command queue")
-            return
-        }
-
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+        guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {
             print("Error: unable to make command buffer")
             return
         }

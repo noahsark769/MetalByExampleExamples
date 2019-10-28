@@ -58,8 +58,8 @@
             filePath = "../MetalByExampleExamples/ChapterFour/ChapterFour.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "updateUniformsForView(aspectRatio:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,8 +74,24 @@
             filePath = "../MetalByExampleExamples/ChapterFour/ChapterFour.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "updateUniformsForView(aspectRatio:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4AA840F-A1EF-47F8-A8B3-EC9353458EEC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../MetalByExampleExamples/ChapterFour/ChapterFour.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "updateUniformsForView(aspectRatio:)"
             landmarkType = "7">
          </BreakpointContent>
