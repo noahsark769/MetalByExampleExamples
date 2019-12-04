@@ -9,6 +9,7 @@
 import Foundation
 import MetalKit
 import SwiftUI
+import ModelIO
 
 /// Goal of Chapter Four is to make a pulsating, rotating cube with colors interpolated through its corners.
 
@@ -55,13 +56,22 @@ final class ChapterFourRenderer: NSObject {
     private let pipelineState: MTLRenderPipelineState
     private let depthState: MTLDepthStencilState
     private var worldToView: matrix_float4x4
-    var offsetInViewCoordinates: CGPoint = .zero {
-        didSet {
-            
+    private let camera: MDLCamera
+    private let commandQueue: MTLCommandQueue
+    var offsetInViewCoordinates: CGPoint = .zero
+
+    var projectionType: MDLCameraProjection {
+        get {
+            return self.camera.projection
+        }
+        set {
+            self.camera.projection = self.projectionType
         }
     }
 
     init(device: MTLDevice, mtkView: MTKView) {
+        self.commandQueue = device.makeCommandQueue()!
+
         let vertices = [
             ChapterFourVertexInOut(position: SIMD4<Float>(-1, 1, 1, 1), color: SIMD4<Float>(0, 1, 1, 1)),
             ChapterFourVertexInOut(position: SIMD4<Float>(-1, -1, 1, 1), color: SIMD4<Float>(0, 0, 1, 1)),
@@ -128,20 +138,28 @@ final class ChapterFourRenderer: NSObject {
 
         let size = mtkView.drawableSize
         let aspect = Float(size.width) / Float(size.height)
-        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspect, nearZ: 1, farZ: 100)
+
+        let camera = MDLCamera()
+        camera.projection = .perspective
+        camera.nearVisibilityDistance = 0.1
+        camera.farVisibilityDistance = 1000
+        camera.fieldOfView = 60
+        camera.look(at: SIMD3<Float>(0, 0, 0), from: SIMD3<Float>(8, 0, 0))
+        self.camera = camera
+
+        self.worldToView = camera.projectionMatrix
 
         super.init()
-        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspect, nearZ: 1, farZ: 100)
         self.updateUniformsForView(aspectRatio: aspect)
     }
 
     func updateUniformsForView(aspectRatio: Float) {
-//        let identity = matrix_float4x4(diagonal: SIMD4<Float>(1, 1, 1, 1))
+        self.camera.sensorAspect = aspectRatio
         let modelToWorld =
             matrix4x4_translation(0, 0, -5) *
             matrix4x4_rotation(radians: radians_from_degrees(45), axis: SIMD3<Float>(1, 0, 0)) *
             matrix4x4_rotation(radians: radians_from_degrees(45), axis: SIMD3<Float>(0, 1, 0))
-        self.worldToView = matrix_perspective_right_hand(fovyRadians: radians_from_degrees(65), aspectRatio: aspectRatio, nearZ: 1, farZ: 100)
+        self.worldToView = self.camera.projectionMatrix
         let uniforms = [ChapterFourUniforms(modelViewProjection: self.worldToView * modelToWorld)]
         memcpy(self.uniformsBuffer.contents(), UnsafeRawPointer(uniforms), MemoryLayout<ChapterFourUniforms>.size)
     }
@@ -162,12 +180,7 @@ extension ChapterFourRenderer: MTKViewDelegate {
             return
         }
 
-        guard let commandQueue = device.makeCommandQueue() else {
-            print("Error: unable to make command queue")
-            return
-        }
-
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+        guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {
             print("Error: unable to make command buffer")
             return
         }
